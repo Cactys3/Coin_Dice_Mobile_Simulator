@@ -1,0 +1,31 @@
+[gd_scene load_steps=7 format=3 uid="uid://7x2gx0j65t4i"]
+
+[ext_resource type="PhysicsMaterial" uid="uid://bg8pvdwm7best" path="res://Textures/Dice_Physics.tres" id="1_lbafm"]
+[ext_resource type="Script" path="res://Scripts/die.gd" id="1_ngcob"]
+[ext_resource type="Texture2D" uid="uid://cchb1kj2h7a6d" path="res://Textures/Die.png" id="1_rorkr"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vnv4g"]
+size = Vector3(1.5, 1.5, 1.5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_5cwgq"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nr86j"]
+albedo_texture = ExtResource("1_rorkr")
+texture_filter = 0
+
+[node name="Die" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7, 0)
+script = ExtResource("1_ngcob")
+
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+physics_material_override = ExtResource("1_lbafm")
+gravity_scale = 1.5
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00379848, 0.00792623, 0.00394821)
+shape = SubResource("BoxShape3D_vnv4g")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0.0075531, 0.0165558, 0.00558877)
+mesh = SubResource("BoxMesh_5cwgq")
+surface_material_override/0 = SubResource("StandardMaterial3D_nr86j")
